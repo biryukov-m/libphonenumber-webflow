@@ -1,7 +1,6 @@
-import { parsePhoneNumberFromString } from 'libphonenumber-js';
+import { CountryCode, parsePhoneNumberFromString } from 'libphonenumber-js';
 import './scss/style.scss';
 
-const PHONE_FORM = document.querySelector('#check_phone__form') as HTMLFormElement | null;
 const PHONE_SUBMIT = document.querySelector('#check_phone__submit');
 
 function setErrorField(error: string) {
@@ -9,8 +8,8 @@ function setErrorField(error: string) {
   if (PHONE_ERROR !== null && PHONE_ERROR instanceof HTMLSpanElement) PHONE_ERROR.innerText = error;
 }
 
-function validatePhoneNumber(value: string) {
-  const phoneNumber = parsePhoneNumberFromString(value, 'UA');
+function validatePhoneNumber(value: string, country: CountryCode = 'UA') {
+  const phoneNumber = parsePhoneNumberFromString(value, country);
   return phoneNumber && phoneNumber.isValid();
 }
 
