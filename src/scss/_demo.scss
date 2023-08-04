@@ -27,25 +27,33 @@
       font-size: 1rem;
       height: 22px;
     }
-    .check_phone__input {
-      padding: 7px 14px 7px 7px;
-      height: 40px;
-      line-height: 40px;
-      background-color: #434343;
-      color: #eeeeff;
-      font-family: 'Courier New';
-      font-size: 1.2rem;
-      border-radius: 6px;
+    .check_phone__input-holder {
       margin-bottom: 22px;
 
-      &:focus {
-        outline: 1px #bcbcbc solid;
-      }
+      .check_phone__input {
+        padding-top: 7px;
+        padding-bottom: 7px;
+        padding-left: 46px;
+        padding-right: 12px;
+        width: 100%;
 
-      &.--has_error {
-        outline: 2px red solid;
+        height: 40px;
+        line-height: 40px;
+        background-color: #434343;
+        color: #eeeeff;
+        font-family: 'Courier New';
+        font-size: 1rem;
+        border-radius: 6px;
+        &:focus {
+          outline: 1px #bcbcbc solid;
+        }
+
+        &.--has_error {
+          outline: 2px red solid;
+        }
       }
     }
+
     .check_phone__submit {
       display: flex;
       justify-content: center;
@@ -65,4 +73,14 @@
       }
     }
   }
+}
+
+.iti__country-list {
+  background-color: #434343;
+  color: #fff;
+  font-family: 'Verdana', sans-serif;
+  font-size: 0.8rem;
+  border-radius: 6px;
+  border: none;
+  margin-top: 8px;
 }

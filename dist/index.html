@@ -14,7 +14,10 @@
     <form method="post" action="#" class="check_phone__form" id="check_phone__form">
       <label for="check_phone__input" class="check_phone__label">Enter phone number:</label>
       <span id="check_phone__error" class="check_phone__error"></span>
-      <input type="tel" name="phone" id="check_phone__input" class="check_phone__input">
+      <div class="check_phone__input-holder">
+        <!-- <input type="tel" name="phone" id="check_phone__input" class="check_phone__input"> -->
+        <input type="tel" name="phone" class="check_phone__input" id="check_phone__input">
+      </div>
       <button type="submit" id="check_phone__submit" class="check_phone__submit">Submit</button>
     </form>
   </main>
