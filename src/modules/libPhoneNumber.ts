@@ -5,7 +5,8 @@ import { CountryCode } from 'libphonenumber-js/types';
 
 function setErrorField(error: string) {
   const PHONE_ERROR = document.querySelector('#check_phone__error');
-  if (PHONE_ERROR !== null && PHONE_ERROR instanceof HTMLSpanElement) PHONE_ERROR.innerText = error;
+  if (PHONE_ERROR !== null && PHONE_ERROR instanceof HTMLSpanElement)
+    PHONE_ERROR.innerText = error;
 }
 
 function validatePhoneNumber(value: string, country: CountryCode = 'UA') {
