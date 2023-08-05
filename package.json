@@ -24,6 +24,7 @@
     "node-sass": "^9.0.0",
     "prettier": "3.0.1",
     "sass-loader": "^13.3.2",
+    "style-loader": "^3.3.3",
     "ts-loader": "^9.4.4",
     "typescript": "^5.1.6",
     "webpack": "^5.88.2",
