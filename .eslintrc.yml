@@ -3,7 +3,6 @@ root: true
 env:
   browser: true
   es2021: true
-
 # 💠 Extends
 extends:
   - airbnb-base
@@ -96,13 +95,18 @@ rules:
   '@typescript-eslint/semi': 'error'
   # Need it to stop if SERVICE is not passed
   '@typescript-eslint/no-throw-literal': 'off'
-
 # ⭐ Overrides
+# overrides:
+#   [
+#     {
+#       files: ['*.ts', '*.tsx'],
+#       rules: { 'no-undef': 'off' },
+#       parserOptions: { project: ['./tsconfig.json'] }
+#     }
+#   ]
+
 overrides:
-  [
-    {
-      files: ['*.ts', '*.tsx'],
-      rules: { 'no-undef': 'off' },
-      parserOptions: { project: ['./tsconfig.json'] }
-    }
-  ]
+  - files: '*.ts'
+    parser: '@typescript-eslint/parser'
+    parserOptions:
+      project: './tsconfig.json'
