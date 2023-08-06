@@ -1,53 +1,70 @@
 import intlTelInput from 'intl-tel-input';
-import parsePhoneNumberFromString from 'libphonenumber-js';
-import { CountryCode } from 'libphonenumber-js/types';
-
-// const PHONE_SUBMIT = document.querySelector('#check_phone__submit');
+import { VALIDATION_ERRORS_MAP } from '../consts/index.const';
 
 class PhoneNumber {
   inputElement: HTMLInputElement;
 
   errorElement: HTMLElement;
 
-  constructor(inputElement: HTMLInputElement, errorElement: HTMLElement) {
+  submitElement: HTMLButtonElement;
+
+  formElement: HTMLFormElement;
+
+  inputPlugin: intlTelInput.Plugin;
+
+  constructor(
+    inputElement: HTMLInputElement,
+    errorElement: HTMLElement,
+    submitElement: HTMLButtonElement,
+    formElement: HTMLFormElement
+  ) {
     this.inputElement = inputElement;
     this.errorElement = errorElement;
-    //
-  }
-
-  initialize() {
-    const input = intlTelInput(this.inputElement, {
+    this.submitElement = submitElement;
+    this.formElement = formElement;
+    this.inputPlugin = intlTelInput(inputElement, {
       utilsScript:
         'https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js'
     });
-    this.inputElement.addEventListener('blur', this.onBlurHandler);
   }
 
-  private clearErrorField() {
+  initialize() {
+    this.inputElement.addEventListener('blur', this.validatePhoneNumber);
+    this.submitElement.addEventListener('click', this.submitHandler);
+  }
+
+  private resetError() {
     this.errorElement.innerText = '';
+    this.inputElement.classList.remove('--has_error');
   }
 
   private setErrorField(error: string) {
-    const PHONE_ERROR = document.querySelector('#check_phone__error');
-    if (PHONE_ERROR !== null && PHONE_ERROR instanceof HTMLSpanElement)
-      PHONE_ERROR.innerText = error;
+    this.errorElement.innerText = error;
   }
 
-  private validatePhoneNumber(value: string, country: CountryCode = 'UA') {
-    const phoneNumber = parsePhoneNumberFromString(value, country);
-    return phoneNumber && phoneNumber.isValid();
-  }
+  private validatePhoneNumber = () => {
+    this.resetError();
+    this.inputElement.value = this.inputElement.value.trim();
 
-  private onBlurHandler(e: Event): void {
-    this.clearErrorField();
-    const target = e.target as HTMLInputElement;
-    const { value } = target;
-    target.classList.remove('--has_error');
-    if (!this.validatePhoneNumber(value)) {
-      target.classList.add('--has_error');
-      this.setErrorField('number invalid');
+    if (!this.inputPlugin.isValidNumber()) {
+      this.inputElement.classList.add('--has_error');
+      const errorCode = this.inputPlugin.getValidationError();
+      const errorMsg = VALIDATION_ERRORS_MAP[errorCode];
+      console.error('VALIDATION ERROR >>>', errorMsg);
+      this.setErrorField(errorMsg);
+      return false;
     }
-  }
+    return true;
+  };
+
+  private submitHandler = (e: Event) => {
+    e.preventDefault();
+    const valid = this.validatePhoneNumber();
+    if (valid) {
+      console.log('VALID, submitting');
+      this.formElement.submit();
+    }
+  };
 }
 
 export default PhoneNumber;
