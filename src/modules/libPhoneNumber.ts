@@ -30,13 +30,14 @@ class PhoneNumber {
 
   initialize() {
     this.inputElement.addEventListener('blur', this.validatePhoneNumber);
+    this.inputElement.addEventListener('keyup', this.resetError);
     this.submitElement.addEventListener('click', this.submitHandler);
   }
 
-  private resetError() {
+  private resetError = () => {
     this.errorElement.innerText = '';
     this.inputElement.classList.remove('--has_error');
-  }
+  };
 
   private setErrorField(error: string) {
     this.errorElement.innerText = error;
