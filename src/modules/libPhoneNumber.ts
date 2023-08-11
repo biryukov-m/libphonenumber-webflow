@@ -1,34 +1,38 @@
 import intlTelInput from 'intl-tel-input';
 import { Language, VALIDATION_ERRORS_MAP } from '../consts/index.const';
+import {
+  ErrorElement,
+  FormElement,
+  IPhoneNumberConstructor,
+  InputElement,
+  SubmitElement
+} from './libPhoneNumber.types';
 
 const validLanguages: Set<Language> = new Set(Object.values(Language));
+
 class PhoneNumber {
-  private inputElement: HTMLInputElement;
+  private inputElement: InputElement;
 
-  private errorElement: HTMLElement;
+  private errorElement: ErrorElement;
 
-  private submitElement: HTMLButtonElement;
+  private submitElement: SubmitElement;
 
-  private formElement: HTMLFormElement;
+  private formElement: FormElement;
 
-  private inputPlugin: intlTelInput.Plugin;
+  private inputPlugin!: intlTelInput.Plugin;
 
   private language: Language;
 
-  constructor(
-    inputElement: HTMLInputElement,
-    errorElement: HTMLSpanElement,
-    submitElement: HTMLButtonElement,
-    formElement: HTMLFormElement
-  ) {
+  constructor({
+    inputElement,
+    errorElement,
+    submitElement,
+    formElement
+  }: IPhoneNumberConstructor) {
     this.inputElement = inputElement;
     this.errorElement = errorElement;
     this.submitElement = submitElement;
     this.formElement = formElement;
-    this.inputPlugin = intlTelInput(inputElement, {
-      utilsScript:
-        'https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js'
-    });
 
     this.language = validLanguages.has(
       this.errorElement.dataset.lang as Language
@@ -38,8 +42,14 @@ class PhoneNumber {
   }
 
   initialize() {
+    const options: intlTelInput.Options = {
+      utilsScript:
+        'https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js'
+    };
+    this.inputPlugin = intlTelInput(this.inputElement, options);
     this.inputElement.addEventListener('blur', this.validatePhoneNumber);
     this.inputElement.addEventListener('keyup', this.resetError);
+    this.inputElement.addEventListener('countrychange', this.resetError);
     this.submitElement.addEventListener('click', this.submitHandler);
   }
 

@@ -15,12 +15,12 @@ window.onload = () => {
     FORM instanceof HTMLFormElement &&
     SUBMIT_BTN instanceof HTMLButtonElement
   ) {
-    const phoneNumber = new PhoneNumber(
-      PHONE_INPUT,
-      ERROR_INPUT,
-      SUBMIT_BTN,
-      FORM
-    );
+    const phoneNumber = new PhoneNumber({
+      inputElement: PHONE_INPUT,
+      errorElement: ERROR_INPUT,
+      submitElement: SUBMIT_BTN,
+      formElement: FORM
+    });
     phoneNumber.initialize();
   } else {
     throw new Error(DOM_EXIST_ERROR);
