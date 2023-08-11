@@ -1,13 +1,13 @@
 import 'intl-tel-input/build/css/intlTelInput.css';
 import './scss/style.scss';
 import PhoneNumber from './modules/libPhoneNumber';
-import { DOM_ELEMENTS, DOM_EXIST_ERROR } from './consts/index.const';
+import { DomElements, DOM_EXIST_ERROR } from './consts/index.const';
 
 window.onload = () => {
-  const PHONE_INPUT = document.querySelector(DOM_ELEMENTS.input);
-  const ERROR_INPUT = document.querySelector(DOM_ELEMENTS.error);
-  const FORM = document.querySelector(DOM_ELEMENTS.form);
-  const SUBMIT_BTN = document.querySelector(DOM_ELEMENTS.submit);
+  const PHONE_INPUT = document.querySelector(DomElements.input);
+  const ERROR_INPUT = document.querySelector(DomElements.error);
+  const FORM = document.querySelector(DomElements.form);
+  const SUBMIT_BTN = document.querySelector(DomElements.submit);
 
   if (
     PHONE_INPUT instanceof HTMLInputElement &&

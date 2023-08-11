@@ -1,20 +1,23 @@
 import intlTelInput from 'intl-tel-input';
-import { VALIDATION_ERRORS_MAP } from '../consts/index.const';
+import { Language, VALIDATION_ERRORS_MAP } from '../consts/index.const';
 
+const validLanguages: Set<Language> = new Set(Object.values(Language));
 class PhoneNumber {
-  inputElement: HTMLInputElement;
+  private inputElement: HTMLInputElement;
 
-  errorElement: HTMLElement;
+  private errorElement: HTMLElement;
 
-  submitElement: HTMLButtonElement;
+  private submitElement: HTMLButtonElement;
 
-  formElement: HTMLFormElement;
+  private formElement: HTMLFormElement;
 
-  inputPlugin: intlTelInput.Plugin;
+  private inputPlugin: intlTelInput.Plugin;
+
+  private language: Language;
 
   constructor(
     inputElement: HTMLInputElement,
-    errorElement: HTMLElement,
+    errorElement: HTMLSpanElement,
     submitElement: HTMLButtonElement,
     formElement: HTMLFormElement
   ) {
@@ -26,6 +29,12 @@ class PhoneNumber {
       utilsScript:
         'https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js'
     });
+
+    this.language = validLanguages.has(
+      this.errorElement.dataset.lang as Language
+    )
+      ? (this.errorElement.dataset.lang as Language)
+      : Language.EN;
   }
 
   initialize() {
@@ -50,7 +59,8 @@ class PhoneNumber {
     if (!this.inputPlugin.isValidNumber()) {
       this.inputElement.classList.add('--has_error');
       const errorCode = this.inputPlugin.getValidationError();
-      const errorMsg = VALIDATION_ERRORS_MAP[errorCode];
+      const errorMsg = VALIDATION_ERRORS_MAP[this.language][errorCode];
+
       console.error('VALIDATION ERROR >>>', errorMsg);
       this.setErrorField(errorMsg);
       return false;
