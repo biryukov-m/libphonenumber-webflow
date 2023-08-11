@@ -5,24 +5,27 @@ export enum DomElements {
   submit = '#check_phone__submit'
 }
 
-export const DOM_EXIST_ERROR = `Can't initialize telephone input: one of this element ID's doesn't exist on page: ${Object.values(
-  DomElements
-)}`;
+export enum DataAttributes {
+  // data-lang in HTML
+  Language = 'lang',
+  // data-initial-country in HTML
+  InitialCountry = 'initialCountry'
+}
 
-export enum Language {
+export enum Languages {
   EN = 'EN',
   UA = 'UA'
 }
 
 export const VALIDATION_ERRORS_MAP = {
-  [Language.EN]: [
+  [Languages.EN]: [
     'Invalid number',
     'Invalid country code',
     'Too short',
     'Too long',
     'Invalid number'
   ],
-  [Language.UA]: [
+  [Languages.UA]: [
     'Невірний номер',
     'Невірний код країни',
     'Занадто короткий номер',
@@ -30,3 +33,7 @@ export const VALIDATION_ERRORS_MAP = {
     'Невірний номер'
   ]
 };
+
+export const DOM_EXIST_ERROR = `Can't initialize telephone input: one of this element ID's doesn't exist on page: ${Object.values(
+  DomElements
+)}`;
