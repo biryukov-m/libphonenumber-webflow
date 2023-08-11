@@ -102,7 +102,7 @@ class PhoneNumber {
   };
 
   private getUserCountry = async (callback: Function) => {
-    const url = `https://ipinfo.ioй/json?token=${token}`;
+    const url = `https://ipinfo.io/json?token=${token}`;
     const headers = { Accept: 'application/json' };
     try {
       const resp = await fetch(url, { headers });
