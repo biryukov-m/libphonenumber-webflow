@@ -34,11 +34,7 @@ class PhoneNumber {
     this.submitElement = submitElement;
     this.formElement = formElement;
 
-    this.language = validLanguages.has(
-      this.errorElement.dataset.lang as Language
-    )
-      ? (this.errorElement.dataset.lang as Language)
-      : Language.EN;
+    this.language = this.determineLanguage();
   }
 
   initialize() {
@@ -52,6 +48,11 @@ class PhoneNumber {
     this.inputElement.addEventListener('countrychange', this.resetError);
     this.submitElement.addEventListener('click', this.submitHandler);
   }
+
+  private determineLanguage = () =>
+    validLanguages.has(this.errorElement.dataset.lang as Language)
+      ? (this.errorElement.dataset.lang as Language)
+      : Language.EN;
 
   private resetError = () => {
     this.errorElement.innerText = '';
