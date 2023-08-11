@@ -1,5 +1,9 @@
 import intlTelInput from 'intl-tel-input';
-import { Language, VALIDATION_ERRORS_MAP } from '../consts/index.const';
+import {
+  DataAttributes,
+  Languages,
+  VALIDATION_ERRORS_MAP
+} from '../consts/index.consts';
 import {
   ErrorElement,
   FormElement,
@@ -7,21 +11,24 @@ import {
   InputElement,
   SubmitElement
 } from './libPhoneNumber.types';
+import token from '../consts/token';
 
-const validLanguages: Set<Language> = new Set(Object.values(Language));
+const validLanguages: Set<Languages> = new Set(Object.values(Languages));
 
 class PhoneNumber {
-  private inputElement: InputElement;
+  private readonly inputElement: InputElement;
 
-  private errorElement: ErrorElement;
+  private readonly errorElement: ErrorElement;
 
-  private submitElement: SubmitElement;
+  private readonly submitElement: SubmitElement;
 
-  private formElement: FormElement;
+  private readonly formElement: FormElement;
 
   private inputPlugin!: intlTelInput.Plugin;
 
-  private language: Language;
+  private readonly language: Languages;
+
+  private readonly initialCountry: string;
 
   constructor({
     inputElement,
@@ -33,12 +40,16 @@ class PhoneNumber {
     this.errorElement = errorElement;
     this.submitElement = submitElement;
     this.formElement = formElement;
-
     this.language = this.determineLanguage();
+    this.initialCountry =
+      this.formElement.dataset[DataAttributes.InitialCountry]?.toLowerCase() ||
+      'us';
   }
 
   initialize() {
     const options: intlTelInput.Options = {
+      initialCountry: 'auto',
+      geoIpLookup: this.getUserCountry,
       utilsScript:
         'https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js'
     };
@@ -49,10 +60,12 @@ class PhoneNumber {
     this.submitElement.addEventListener('click', this.submitHandler);
   }
 
-  private determineLanguage = () =>
-    validLanguages.has(this.errorElement.dataset.lang as Language)
-      ? (this.errorElement.dataset.lang as Language)
-      : Language.EN;
+  private determineLanguage = () => {
+    const dataLang = this.errorElement.dataset[
+      DataAttributes.Language
+    ] as Languages;
+    return validLanguages.has(dataLang) ? dataLang : Languages.EN;
+  };
 
   private resetError = () => {
     this.errorElement.innerText = '';
@@ -85,6 +98,18 @@ class PhoneNumber {
     if (valid) {
       console.log('VALID, submitting');
       this.formElement.submit();
+    }
+  };
+
+  private getUserCountry = async (callback: Function) => {
+    const url = `https://ipinfo.ioй/json?token=${token}`;
+    const headers = { Accept: 'application/json' };
+    try {
+      const resp = await fetch(url, { headers });
+      const json = await resp.json();
+      return callback(json.country);
+    } catch {
+      return callback(this.initialCountry);
     }
   };
 }

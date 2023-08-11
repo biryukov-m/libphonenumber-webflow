@@ -1,7 +1,7 @@
 import 'intl-tel-input/build/css/intlTelInput.css';
 import './scss/style.scss';
 import PhoneNumber from './modules/libPhoneNumber';
-import { DomElements, DOM_EXIST_ERROR } from './consts/index.const';
+import { DomElements, DOM_EXIST_ERROR } from './consts/index.consts';
 
 window.onload = () => {
   const PHONE_INPUT = document.querySelector(DomElements.input);
