@@ -1,6 +1,6 @@
 import intlTelInput from 'intl-tel-input';
 import {
-  DataAttributes,
+  OptionsAttributes,
   Languages,
   VALIDATION_ERRORS_MAP
 } from '../consts/index.consts';
@@ -41,7 +41,7 @@ class PhoneNumber {
     this.submitElement = submitElement;
     this.formElement = formElement;
 
-    // settings from data-attributes of form element
+    // settings read from attributes of form element
     this.language = this.determineLanguage();
     this.initialCountry = this.determineInitialCountry();
   }
@@ -61,17 +61,17 @@ class PhoneNumber {
   };
 
   private readonly determineLanguage = () => {
-    const dataLang = this.formElement.dataset[
-      DataAttributes.data_check_phone_language
-    ]?.toLowerCase() as Languages;
+    const dataLang = this.formElement
+      .getAttribute(OptionsAttributes.language)
+      ?.toLowerCase() as Languages;
     return validLanguages.has(dataLang) ? dataLang : Languages.EN;
   };
 
   private readonly determineInitialCountry = () => {
     return (
-      this.formElement.dataset[
-        DataAttributes.data_check_phone_initial_country
-      ]?.toLowerCase() || 'us'
+      this.formElement
+        .getAttribute(OptionsAttributes.initial_country)
+        ?.toLowerCase() || 'us'
     );
   };
 
