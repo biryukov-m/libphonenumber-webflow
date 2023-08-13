@@ -43,13 +43,10 @@ class PhoneNumber {
 
     // settings from data-attributes of form element
     this.language = this.determineLanguage();
-    this.initialCountry =
-      this.formElement.dataset[
-        DataAttributes.data_initial_country
-      ]?.toLowerCase() || 'us';
+    this.initialCountry = this.determineInitialCountry();
   }
 
-  initialize() {
+  readonly initialize = () => {
     const options: intlTelInput.Options = {
       initialCountry: 'auto',
       geoIpLookup: this.getUserCountry,
@@ -61,25 +58,33 @@ class PhoneNumber {
     this.inputElement.addEventListener('keyup', this.resetError);
     this.inputElement.addEventListener('countrychange', this.resetError);
     this.submitElement.addEventListener('click', this.submitHandler);
-  }
+  };
 
-  private determineLanguage = () => {
+  private readonly determineLanguage = () => {
     const dataLang = this.formElement.dataset[
-      DataAttributes.data_language
-    ] as Languages;
+      DataAttributes.data_check_phone_language
+    ]?.toLowerCase() as Languages;
     return validLanguages.has(dataLang) ? dataLang : Languages.EN;
   };
 
-  private resetError = () => {
+  private readonly determineInitialCountry = () => {
+    return (
+      this.formElement.dataset[
+        DataAttributes.data_check_phone_initial_country
+      ]?.toLowerCase() || 'us'
+    );
+  };
+
+  private readonly resetError = () => {
     this.errorElement.innerText = '';
     this.inputElement.classList.remove('--has_error');
   };
 
-  private setErrorField(error: string) {
+  private readonly setErrorField = (error: string) => {
     this.errorElement.innerText = error;
-  }
+  };
 
-  private validatePhoneNumber = () => {
+  private readonly validatePhoneNumber = () => {
     this.resetError();
     this.inputElement.value = this.inputElement.value.trim();
 
@@ -95,7 +100,7 @@ class PhoneNumber {
     return true;
   };
 
-  private submitHandler = (e: Event) => {
+  private readonly submitHandler = (e: Event) => {
     e.preventDefault();
     const valid = this.validatePhoneNumber();
     if (valid) {
@@ -104,7 +109,7 @@ class PhoneNumber {
     }
   };
 
-  private getUserCountry = async (callback: Function) => {
+  private readonly getUserCountry = async (callback: Function) => {
     const url = `https://ipinfo.io/json?token=${token}`;
     const headers = { Accept: 'application/json' };
     try {

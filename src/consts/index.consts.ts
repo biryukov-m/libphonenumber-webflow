@@ -1,20 +1,23 @@
+const BASE_DATA_HTML_PREFIX = 'data-check-phone';
+const BASE_DATASET_JS_PREFIX = 'checkPhone';
+
 export enum QuerySelectors {
-  input = 'input[data-id="check-phone-input"]',
-  error = '[data-id="check-phone-error"]',
-  form = 'form[data-id="check-phone-form"]',
-  submit = 'button[data-id="check-phone-submit"]'
+  input = `input[${BASE_DATA_HTML_PREFIX}-id="input"]`,
+  error = `[${BASE_DATA_HTML_PREFIX}-id="error"]`,
+  form = `form[${BASE_DATA_HTML_PREFIX}-id="form"]`,
+  submit = `button[${BASE_DATA_HTML_PREFIX}-id="submit"]`
 }
 
 export enum DataAttributes {
   // data-lang in HTML
-  data_language = 'language',
+  data_check_phone_language = `${BASE_DATASET_JS_PREFIX}Language`,
   // data-initial-country in HTML
-  data_initial_country = 'initialCountry'
+  data_check_phone_initial_country = `${BASE_DATASET_JS_PREFIX}InitialCountry`
 }
 
 export enum Languages {
-  EN = 'EN',
-  UA = 'UA'
+  EN = 'en',
+  UA = 'ua'
 }
 
 export const VALIDATION_ERRORS_MAP = {
