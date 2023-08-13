@@ -29,12 +29,12 @@ window.onload = () => {
     }
     if (!(FORM instanceof HTMLFormElement)) {
       errors.push(
-        `Form must be HTML form element and have corresponding attribute (${QuerySelectors.error}). ${FORM};`
+        `Form must be HTML form element and have corresponding attribute (${QuerySelectors.form}). ${FORM};`
       );
     }
-    if (!(SUBMIT_BTN instanceof HTMLFormElement)) {
+    if (!(SUBMIT_BTN instanceof HTMLElement)) {
       errors.push(
-        `Submit button must be HTML element and have corresponding attribute (${QuerySelectors.error}). ${SUBMIT_BTN};`
+        `Submit button must be HTML element and have corresponding attribute (${QuerySelectors.submit}). ${SUBMIT_BTN};`
       );
     }
     return errors;
