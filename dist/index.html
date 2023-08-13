@@ -10,13 +10,15 @@
 
 <body>
   <main class="check_phone">
-    <form method="post" action="#" class="check_phone__form" id="check_phone__form" data-initial-country="ua">
+    <form method="post" action="#" class="check_phone__form" id="check_phone__form" data-id="check-phone-form"
+      data-initial-country="gb" data-language="UA">
       <label for="check_phone__input" class="check_phone__label">Enter phone number:</label>
-      <span id="check_phone__error" class="check_phone__error" data-lang="UA"></span>
+      <span id="check-phone-error" data-id="check-phone-error" class="check_phone__error"></span>
       <div class="check_phone__input-holder">
-        <input type="tel" name="phone" class="check_phone__input" id="check_phone__input">
+        <input type="tel" name="phone" class="check_phone__input" id="check-phone-input" data-id="check-phone-input">
       </div>
-      <button type="submit" id="check_phone__submit" class="check_phone__submit">Submit</button>
+      <button type="submit" id="check-phone-submit" data-id="check-phone-submit"
+        class="check_phone__submit">Submit</button>
     </form>
   </main>
 

@@ -1,15 +1,15 @@
-export enum DomElements {
-  input = '#check_phone__input',
-  error = '#check_phone__error',
-  form = '#check_phone__form',
-  submit = '#check_phone__submit'
+export enum QuerySelectors {
+  input = 'input[data-id="check-phone-input"]',
+  error = '[data-id="check-phone-error"]',
+  form = 'form[data-id="check-phone-form"]',
+  submit = 'button[data-id="check-phone-submit"]'
 }
 
 export enum DataAttributes {
   // data-lang in HTML
-  Language = 'lang',
+  data_language = 'language',
   // data-initial-country in HTML
-  InitialCountry = 'initialCountry'
+  data_initial_country = 'initialCountry'
 }
 
 export enum Languages {
@@ -35,5 +35,5 @@ export const VALIDATION_ERRORS_MAP = {
 };
 
 export const DOM_EXIST_ERROR = `Can't initialize telephone input: one of this element ID's doesn't exist on page: ${Object.values(
-  DomElements
+  QuerySelectors
 )}`;

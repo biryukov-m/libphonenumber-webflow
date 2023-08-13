@@ -40,10 +40,13 @@ class PhoneNumber {
     this.errorElement = errorElement;
     this.submitElement = submitElement;
     this.formElement = formElement;
+
+    // settings from data-attributes of form element
     this.language = this.determineLanguage();
     this.initialCountry =
-      this.formElement.dataset[DataAttributes.InitialCountry]?.toLowerCase() ||
-      'us';
+      this.formElement.dataset[
+        DataAttributes.data_initial_country
+      ]?.toLowerCase() || 'us';
   }
 
   initialize() {
@@ -61,8 +64,8 @@ class PhoneNumber {
   }
 
   private determineLanguage = () => {
-    const dataLang = this.errorElement.dataset[
-      DataAttributes.Language
+    const dataLang = this.formElement.dataset[
+      DataAttributes.data_language
     ] as Languages;
     return validLanguages.has(dataLang) ? dataLang : Languages.EN;
   };
