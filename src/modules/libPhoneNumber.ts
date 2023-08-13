@@ -77,7 +77,7 @@ class PhoneNumber {
 
   private readonly resetError = () => {
     this.errorElement.innerText = '';
-    this.inputElement.classList.remove('--has_error');
+    this.inputElement.classList.remove('has-error');
   };
 
   private readonly setErrorField = (error: string) => {
@@ -89,7 +89,7 @@ class PhoneNumber {
     this.inputElement.value = this.inputElement.value.trim();
 
     if (!this.inputPlugin.isValidNumber()) {
-      this.inputElement.classList.add('--has_error');
+      this.inputElement.classList.add('has-error');
       const errorCode = this.inputPlugin.getValidationError();
       const errorMsg = VALIDATION_ERRORS_MAP[this.language][errorCode];
 

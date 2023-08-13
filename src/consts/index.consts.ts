@@ -9,9 +9,9 @@ export enum QuerySelectors {
 }
 
 export enum DataAttributes {
-  // data-lang in HTML
+  // data-check-phone-language in HTML
   data_check_phone_language = `${BASE_DATASET_JS_PREFIX}Language`,
-  // data-initial-country in HTML
+  // data-check-phone-initial-country in HTML
   data_check_phone_initial_country = `${BASE_DATASET_JS_PREFIX}InitialCountry`
 }
 
