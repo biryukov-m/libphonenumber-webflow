@@ -42,7 +42,7 @@ window.onload = () => {
 
   try {
     const errors = verifyElements();
-    if (errors) throw new Error(errors.toString());
+    if (errors.length > 0) throw new Error(errors.toString());
     const phoneNumber = new PhoneNumber({
       inputElement: PHONE_INPUT as InputElement,
       errorElement: ERROR_INPUT as ErrorElement,
