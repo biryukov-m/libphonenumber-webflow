@@ -1,5 +1,11 @@
 {
-  "private": true,
+  "name": "tel-input-webflow",
+  "version": "1.0.0",
+  "main": "dist/bundle.js",
+  "description": "tel input library for using as bundle in webflow",
+  "author": "Maxym Biriukov <biryukov.mm@gmail.com>",
+  "license": "MIT",
+  "private": false,
   "scripts": {
     "start": "webpack serve --config webpack.config.js",
     "build": "webpack --config webpack.config.js"
