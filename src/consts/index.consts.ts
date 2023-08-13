@@ -35,7 +35,3 @@ export const VALIDATION_ERRORS_MAP = {
     'Невірний номер'
   ]
 };
-
-export const DOM_EXIST_ERROR = `Can't initialize telephone input: one of this element ID's doesn't exist on page: ${Object.values(
-  QuerySelectors
-)}`;

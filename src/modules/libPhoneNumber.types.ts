@@ -1,6 +1,6 @@
 export type InputElement = HTMLInputElement;
 export type ErrorElement = HTMLElement;
-export type SubmitElement = HTMLButtonElement;
+export type SubmitElement = HTMLElement;
 export type FormElement = HTMLFormElement;
 
 export interface IPhoneNumberConstructor {
