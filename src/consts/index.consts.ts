@@ -1,18 +1,18 @@
 const BASE_DATA_HTML_PREFIX = 'check-phone';
 
-export enum QuerySelectors {
-  input = `input[${BASE_DATA_HTML_PREFIX}-id="input"]`,
-  error = `[${BASE_DATA_HTML_PREFIX}-id="error"]`,
-  form = `form[${BASE_DATA_HTML_PREFIX}-id="form"]`,
-  submit = `[${BASE_DATA_HTML_PREFIX}-id="submit"]`
-}
+export const QUERY_SELECTORS = {
+  input: `input[${BASE_DATA_HTML_PREFIX}-id="input"]`,
+  error: `[${BASE_DATA_HTML_PREFIX}-id="error"]`,
+  form: `form[${BASE_DATA_HTML_PREFIX}-id="form"]`,
+  submit: `[${BASE_DATA_HTML_PREFIX}-id="submit"]`
+};
 
-export enum OptionsAttributes {
+export const OPTIONS_ATTRIBUTES = {
   // check-phone-language in HTML
-  language = `${BASE_DATA_HTML_PREFIX}-language`,
+  language: `${BASE_DATA_HTML_PREFIX}-language`,
   // check-phone-initial-country in HTML
-  initial_country = `${BASE_DATA_HTML_PREFIX}-initial-country`
-}
+  initial_country: `${BASE_DATA_HTML_PREFIX}-initial-country`
+};
 
 export enum Languages {
   EN = 'en',

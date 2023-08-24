@@ -1,6 +1,6 @@
 import intlTelInput from 'intl-tel-input';
 import {
-  OptionsAttributes,
+  OPTIONS_ATTRIBUTES,
   Languages,
   VALIDATION_ERRORS_MAP
 } from '../consts/index.consts';
@@ -62,7 +62,7 @@ class PhoneNumber {
 
   private readonly determineLanguage = () => {
     const dataLang = this.formElement
-      .getAttribute(OptionsAttributes.language)
+      .getAttribute(OPTIONS_ATTRIBUTES.language)
       ?.toLowerCase() as Languages;
     return validLanguages.has(dataLang) ? dataLang : Languages.EN;
   };
@@ -70,7 +70,7 @@ class PhoneNumber {
   private readonly determineInitialCountry = () => {
     return (
       this.formElement
-        .getAttribute(OptionsAttributes.initial_country)
+        .getAttribute(OPTIONS_ATTRIBUTES.initial_country)
         ?.toLowerCase() || 'us'
     );
   };
@@ -92,8 +92,6 @@ class PhoneNumber {
       this.inputElement.classList.add('has-error');
       const errorCode = this.inputPlugin.getValidationError();
       const errorMsg = VALIDATION_ERRORS_MAP[this.language][errorCode];
-
-      console.error('VALIDATION ERROR >>>', errorMsg);
       this.setErrorField(errorMsg);
       return false;
     }
@@ -104,7 +102,6 @@ class PhoneNumber {
     e.preventDefault();
     const valid = this.validatePhoneNumber();
     if (valid) {
-      console.log('VALID, submitting');
       this.formElement.submit();
     }
   };

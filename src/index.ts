@@ -1,7 +1,7 @@
 import 'intl-tel-input/build/css/intlTelInput.css';
 import './scss/style.scss';
 import PhoneNumber from './modules/libPhoneNumber';
-import { QuerySelectors } from './consts/index.consts';
+import { QUERY_SELECTORS } from './consts/index.consts';
 import {
   ErrorElement,
   FormElement,
@@ -10,31 +10,31 @@ import {
 } from './modules/libPhoneNumber.types';
 
 window.onload = () => {
-  const PHONE_INPUT = document.querySelector(QuerySelectors.input);
-  const ERROR_INPUT = document.querySelector(QuerySelectors.error);
-  const FORM = document.querySelector(QuerySelectors.form);
-  const SUBMIT_BTN = document.querySelector(QuerySelectors.submit);
+  const PHONE_INPUT = document.querySelector(QUERY_SELECTORS.input);
+  const ERROR_INPUT = document.querySelector(QUERY_SELECTORS.error);
+  const FORM = document.querySelector(QUERY_SELECTORS.form);
+  const SUBMIT_BTN = document.querySelector(QUERY_SELECTORS.submit);
 
   const verifyElements = () => {
     const errors = [];
     if (!(PHONE_INPUT instanceof HTMLInputElement)) {
       errors.push(
-        `Phone input must be HTML input item and have corresponding attribute (${QuerySelectors.input}) ${PHONE_INPUT};`
+        `Phone input must be HTML input item and have corresponding attribute (${QUERY_SELECTORS.input}) ${PHONE_INPUT};`
       );
     }
     if (!(ERROR_INPUT instanceof HTMLElement)) {
       errors.push(
-        `Error text field must be HTML item and have corresponding attribute (${QuerySelectors.error}) ${ERROR_INPUT};`
+        `Error text field must be HTML item and have corresponding attribute (${QUERY_SELECTORS.error}) ${ERROR_INPUT};`
       );
     }
     if (!(FORM instanceof HTMLFormElement)) {
       errors.push(
-        `Form must be HTML form element and have corresponding attribute (${QuerySelectors.form}). ${FORM};`
+        `Form must be HTML form element and have corresponding attribute (${QUERY_SELECTORS.form}). ${FORM};`
       );
     }
     if (!(SUBMIT_BTN instanceof HTMLElement)) {
       errors.push(
-        `Submit button must be HTML element and have corresponding attribute (${QuerySelectors.submit}). ${SUBMIT_BTN};`
+        `Submit button must be HTML element and have corresponding attribute (${QUERY_SELECTORS.submit}). ${SUBMIT_BTN};`
       );
     }
     return errors;
