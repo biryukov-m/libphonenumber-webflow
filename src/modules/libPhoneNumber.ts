@@ -58,6 +58,10 @@ class PhoneNumber {
     this.inputElement.addEventListener('keyup', this.resetError);
     this.inputElement.addEventListener('countrychange', this.resetError);
     this.submitElement.addEventListener('click', this.clickSubmitBtnHandler);
+
+    this.inputElement.parentElement
+      ?.querySelector('.iti__flag-container')
+      ?.addEventListener('click', this.resetError);
   };
 
   private readonly determineLanguage = () => {
