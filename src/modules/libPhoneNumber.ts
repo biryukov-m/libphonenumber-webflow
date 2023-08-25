@@ -57,7 +57,7 @@ class PhoneNumber {
     this.inputElement.addEventListener('blur', this.validatePhoneNumber);
     this.inputElement.addEventListener('keyup', this.resetError);
     this.inputElement.addEventListener('countrychange', this.resetError);
-    this.submitElement.addEventListener('click', this.submitHandler);
+    this.submitElement.addEventListener('click', this.clickSubmitBtnHandler);
   };
 
   private readonly determineLanguage = () => {
@@ -92,20 +92,21 @@ class PhoneNumber {
       this.inputElement.classList.add('has-error');
       const errorCode = this.inputPlugin.getValidationError();
       const errorMsg = VALIDATION_ERRORS_MAP[this.language][errorCode];
-
-      console.error('VALIDATION ERROR >>>', errorMsg);
       this.setErrorField(errorMsg);
       return false;
     }
     return true;
   };
 
-  private readonly submitHandler = (e: Event) => {
-    e.preventDefault();
+  private readonly clickSubmitBtnHandler = (e: Event) => {
     const valid = this.validatePhoneNumber();
     if (valid) {
-      console.log('VALID, submitting');
-      this.formElement.submit();
+      const internationalNumber = this.inputPlugin.getNumber();
+      this.inputElement.value = internationalNumber;
+    } else {
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      e.stopPropagation();
     }
   };
 
